@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #ffb3c6 0, #ff8fab 35%, #fb6f92 70%, #ff477e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Floating hearts background */
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      font-size: 18px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    .floating-hearts span:nth-child(odd) {
+      animation-duration: 12s;
+      font-size: 22px;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-20vh) translateX(-20px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 28px 24px 24px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-align: center;
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1, h2 {
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: none;
+      margin-bottom: 12px;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff85a1, #ff3366);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      box-shadow: 0 8px 20px rgba(255, 51, 102, 0.5);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 12px 25px rgba(255, 51, 102, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 14px rgba(255, 51, 102, 0.5);
+    }
+
+    .error {
+      color: #ffdfdf;
+      font-size: 0.85rem;
+      min-height: 18px;
+      margin-top: 4px;
+    }
+
+    .letter {
+      text-align: left;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 8px;
+      margin: 10px 0 16px;
+      font-size: 0.95rem;
+    }
+
+    .letter-line {
+      opacity: 0;
+      transform: translateY(6px);
+      animation: lineFadeIn 0.4s forwards;
+    }
+
+    .letter-line:nth-child(1) { animation-delay: 0.2s; }
+    .letter-line:nth-child(2) { animation-delay: 0.5s; }
+    .letter-line:nth-child(3) { animation-delay: 0.8s; }
+    .letter-line:nth-child(4) { animation-delay: 1.1s; }
+    .letter-line:nth-child(5) { animation-delay: 1.4s; }
+    .letter-line:nth-child(6) { animation-delay: 1.7s; }
+    .letter-line:nth-child(7) { animation-delay: 2.0s; }
+    .letter-line:nth-child(8) { animation-delay: 2.3s; }
+    .letter-line:nth-child(9) { animation-delay: 2.6s; }
+    .letter-line:nth-child(10) { animation-delay: 2.9s; }
+
+    @keyframes lineFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0 18px;
+    }
+
+    .photos-grid img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+      transform: scale(1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .photos-grid img:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.3);
+    }
+
+    .hint-text {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    audio {
+      width: 100%;
+      margin: 14px 0 6px;
+    }
+
+    .final-text {
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .step-indicator {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+
+    /* Envelope styles */
+    .envelope-wrapper {
+      margin: 18px auto 10px;
+      width: 260px;
+      max-width: 100%;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      transition: transform 0.2s ease;
+    }
+
+    .envelope-wrapper:hover .envelope {
+      transform: translateY(-3px);
+    }
+
+    /* NEW: zoom-out animation when opened */
+    .envelope-wrapper.envelope-open .envelope {
+      animation: envelopeZoomOut 0.8s ease forwards;
+    }
+
+    @keyframes envelopeZoomOut {
+      0% {
+        transform: translateY(0) scale(0.5);
+      }
+      100% {
+        transform: translateY(-25px) scale(1.5);
+      }
+    }
+    /* END NEW */
+
+    .envelope-front {
+      position: absolute;
+      inset: 0;
+      background: #ffd6e8;
+      border-radius: 18px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+
+    .envelope-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65%;
+      background: linear-gradient(to top, #ff85a1, #ffb3c6);
+      border-radius: 0 0 18px 18px;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 65%;
+      background: linear-gradient(to bottom, #ffb3c6, #ff8fab);
+      clip-path: polygon(0 0, 100% 0, 50% 70%);
+      transform-origin: top;
+      transition: transform 0.8s ease;
+    }
+
+    .envelope-heart {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      font-size: 1.8rem;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .envelope-letter {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: 18px;
+      height: 0;
+      overflow: hidden;
+      transform: translateY(18px);
+      transition: height 1s ease, transform 1s ease;
+    }
+
+    .envelope-letter .letter-inner {
+      background: #fff9fb;
+      color: #6b2137;
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      max-height: 220px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .envelope-wrapper.envelope-open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-wrapper.envelope-open .envelope-letter {
+      height: 150px;
+      transform: translateY(-45px);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 22px 18px 18px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .photos-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <div class="floating-hearts">
+    <span style="left: 5%; animation-delay: 0s;">❤️</span>
+    <span style="left: 20%; animation-delay: 2s;">💗</span>
+    <span style="left: 35%; animation-delay: 4s;">💕</span>
+    <span style="left: 50%; animation-delay: 1s;">💖</span>
+    <span style="left: 65%; animation-delay: 3s;">❤️</span>
+    <span style="left: 80%; animation-delay: 5s;">💞</span>
+    <span style="left: 90%; animation-delay: 2.5s;">💘</span>
+  </div>
+
+  <div class="app">
+    <!-- STEP 1: PASSWORD -->
+    <section id="password-screen" class="card">
+      <div class="step-indicator">Step 1/3</div>
+      <h1>Hi, my love ❤️</h1>
+      <p class="subtitle">There’s a little secret door only you can open.</p>
+      <input type="password" id="password-input" placeholder="Type our secret word..." />
+      <button class="btn" id="password-btn">
+        Open the letter 💌
+      </button>
+      <div id="password-error" class="error"></div>
+      <p class="hint-text">(You can change the password in the code.)</p>
+    </section>
+
+    <!-- STEP 2: LETTER WITH ENVELOPE -->
+    <section id="letter-screen" class="card hidden">
+      <div class="step-indicator">Step 2/3</div>
+      <h2>To the one I love 💖</h2>
+      <p class="subtitle">Tap the envelope to open your letter.</p>
+
+      <div class="envelope-wrapper" id="envelope">
+        <div class="envelope">
+          <div class="envelope-front">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body"></div>
+            <div class="envelope-heart">💌</div>
+          </div>
+          <div class="envelope-letter">
+            <div class="letter-inner">
+              <p class="letter-line">My love,</p>
+              <p class="letter-line">
+                This page is not just something cute on the internet, it’s my way of saying: I still choose you, no matter what we go through.
+              </p>
+              <p class="letter-line">
+                We’ve had our problems, our misunderstandings, our heavy days… but I don’t want those moments to define us.
+              </p>
+              <p class="letter-line">
+                I want us to put our problems aside, not by pretending they don’t exist, but by remembering that what we have is bigger than any fight.
+              </p>
+              <p class="letter-line">
+                We promised to stand by each other, to grow together, and to keep our hearts connected even when things get hard.
+              </p>
+              <p class="letter-line">
+                I want us to get closer than ever – to talk more, listen more, forgive more, and love each other with a softer, stronger heart.
+              </p>
+              <p class="letter-line">
+                You are not my enemy, you are my person. It’s me and you on the same side, against every problem, not against each other.
+              </p>
+              <p class="letter-line">
+                No matter how messy life gets, I want us to always find our way back to us, to our memories, our promises, and the love that started it all.
+              </p>
+              <p class="letter-line">
+                Let’s hold on to each other, tighter than before. You mean more to me than any problem ever will.
+              </p>
+              <p class="letter-line">Always yours. ❤️</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint-text">Open the envelope first, then you can go to the next page.</p>
+
+      <button class="btn next-btn hidden" data-next="photos-screen" id="letter-next-btn">
+        Next: Our memories 📸
+      </button>
+    </section>
+
+    <!-- STEP 3: PHOTOS -->
+    <section id="photos-screen" class="card hidden">
+      <div class="step-indicator">Step 3/3</div>
+      <h2>Some of our favorite moments 📷</h2>
+      <p class="subtitle">These are just a few of many memories I’m so grateful for.</p>
+      <div class="photos-grid">
+        <!-- Replace these with your own photos -->
+        <img src="images/photo1.jpg" alt="Us 1" />
+        <img src="images/photo2.jpg" alt="Us 2" />
+        <img src="images/photo3.jpg" alt="Us 3" />
+        <img src="images/photo4.jpg" alt="Us 4" />
+      </div>
+      <button class="btn next-btn" data-next="music-screen">
+        One last thing 🎵
+      </button>
+      <p class="hint-text">Put your own photos in the <strong>images</strong> folder and change the names here if you want.</p>
+    </section>
+
+    <!-- STEP 4: MUSIC & FINAL -->
+    <section id="music-screen" class="card hidden">
+      <h2>This song is for us 🎶</h2>
+      <p class="subtitle">Play it, close your eyes, and think of all our future moments together.</p>
+      <!-- Put your song in the music folder and change the file name below -->
+      <audio controls>
+        <source src="music/our-song.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <p class="final-text">
+        I love you more than I can ever explain with code, words, or anything in this world.  
+        This is just the beginning of our story. 💞
+      </p>
+    </section>
+  </div>
+
+  <script>
+    // ✨ Change this to your secret password
+    const CORRECT_PASSWORD = "Ayah2004";
+
+    const passwordInput = document.getElementById("password-input");
+    const passwordBtn = document.getElementById("password-btn");
+    const passwordError = document.getElementById("password-error");
+
+    const screens = {
+      password: document.getElementById("password-screen"),
+      letter: document.getElementById("letter-screen"),
+      photos: document.getElementById("photos-screen"),
+      music: document.getElementById("music-screen"),
+    };
+
+    function showScreen(screenId) {
+      Object.values(screens).forEach((el) => el.classList.add("hidden"));
+      const target = screens[screenId];
+      if (target) {
+        target.classList.remove("hidden");
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    passwordBtn.addEventListener("click", () => {
+      const value = passwordInput.value.trim();
+      if (value === CORRECT_PASSWORD) {
+        passwordError.textContent = "";
+        showScreen("letter");
+      } else {
+        passwordError.textContent = "Wrong password, my love. Try again 🥺";
+      }
+    });
+
+    passwordInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        passwordBtn.click();
+      }
+    });
+
+    // Envelope open logic
+    const envelopeWrapper = document.getElementById("envelope");
+    const letterNextBtn = document.getElementById("letter-next-btn");
+
+    if (envelopeWrapper) {
+      envelopeWrapper.addEventListener("click", () => {
+        if (!envelopeWrapper.classList.contains("envelope-open")) {
+          envelopeWrapper.classList.add("envelope-open");
+          // Show "Next" button after envelope opens & zooms
+          setTimeout(() => {
+            if (letterNextBtn) {
+              letterNextBtn.classList.remove("hidden");
+            }
+          }, 900);
+        }
+      });
+    }
+
+    // Next buttons for other steps
+    document.querySelectorAll(".next-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const nextId = btn.getAttribute("data-next");
+        if (nextId === "photos-screen") showScreen("photos");
+        if (nextId === "music-screen") showScreen("music");
+      });
+    });
+  </script>
+</body>
+</html>
