@@ -314,36 +314,34 @@
     }
 
     .envelope-letter {
-      position: absolute;
-      left: 10%;
-      right: 10%;
-      bottom: 18px;
-      height: 0;
-      overflow: hidden;
-      transform: translateY(18px);
-      transition: height 1s ease, transform 1s ease;
-    }
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 18px;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(18px);
+  transition: max-height 1s ease, transform 1s ease;
+}
 
-    .envelope-letter .letter-inner {
-      background: #fff9fb;
-      color: #6b2137;
-      border-radius: 14px;
-      padding: 12px 12px;
-      font-size: 0.85rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      max-height: 220px;
-      overflow-y: auto;
-      text-align: left;
-    }
+/* Let the whole letter be visible (no cut off) */
+.envelope-wrapper.envelope-open .envelope-letter {
+  max-height: 280px;  /* you can increase/decrease this number */
+  transform: translateY(-25px);
+}
 
-    .envelope-wrapper.envelope-open .envelope-flap {
-      transform: rotateX(180deg);
-    }
+.envelope-letter .letter-inner {
+  background: #fff9fb;
+  color: #6b2137;
+  border-radius: 14px;
+  padding: 12px 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  max-height: none;      /* 🔴 important: remove the cap */
+  overflow-y: auto;
+  text-align: left;
+}
 
-    .envelope-wrapper.envelope-open .envelope-letter {
-      height: 150px;
-      transform: translateY(-45px);
-    }
 
     @media (max-width: 480px) {
       .card {
@@ -534,6 +532,7 @@
   </script>
 </body>
 </html>
+
 
 
 
