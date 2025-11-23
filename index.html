@@ -251,14 +251,14 @@
       position: relative;
       width: 100%;
       height: 180px;
-      transition: transform 0.2s ease;
+      transition: transform 0.25s ease;
     }
 
     .envelope-wrapper:hover .envelope {
       transform: translateY(-3px);
     }
 
-    /* Zoom OUT a bit when opened */
+    /* slight zoom OUT when opened */
     .envelope-wrapper.envelope-open .envelope {
       animation: envelopeZoomOut 0.8s ease forwards;
     }
@@ -268,7 +268,7 @@
         transform: translateY(0) scale(1);
       }
       100% {
-        transform: translateY(-25px) scale(0.9);
+        transform: translateY(-10px) scale(0.95);
       }
     }
 
@@ -320,20 +320,20 @@
     /* sliding paper */
     .envelope-letter {
       position: absolute;
-      left: 10%;
-      right: 10%;
-      bottom: 18px;
-      max-height: 0;       /* start hidden */
-      overflow: visible;   /* allow the paper to extend fully */
-      transform: translateY(18px);
-      transition: max-height 1s ease, transform 1s ease;
+      left: 12%;
+      right: 12%;
+      bottom: 14px;
+      height: 0;
+      overflow: hidden;
+      transform: translateY(12px);
+      transition: height 0.8s ease, transform 0.8s ease;
       z-index: 1;
     }
 
-    /* After opening, show the whole paper */
+    /* After opening, paper slides out but stays tidy */
     .envelope-wrapper.envelope-open .envelope-letter {
-      max-height: 500px;   /* big enough so all the text fits */
-      transform: translateY(-45px);
+      height: 150px;
+      transform: translateY(-10px);
     }
 
     .envelope-letter .letter-inner {
@@ -343,6 +343,8 @@
       padding: 12px 12px;
       font-size: 0.85rem;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      height: 100%;
+      overflow-y: auto;
       text-align: left;
     }
 
@@ -520,7 +522,7 @@
       envelopeWrapper.addEventListener("click", () => {
         if (!envelopeWrapper.classList.contains("envelope-open")) {
           envelopeWrapper.classList.add("envelope-open");
-          // Show "Next" button after envelope opens & zooms
+          // Show "Next" button after envelope opens & slides
           setTimeout(() => {
             if (letterNextBtn) {
               letterNextBtn.classList.remove("hidden");
@@ -541,4 +543,3 @@
   </script>
 </body>
 </html>
-
